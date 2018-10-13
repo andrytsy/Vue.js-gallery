@@ -5,6 +5,7 @@
     <div v-for="row in rows">
       <Gallery :data="row" />
     </div>
+    <FullSize />
   </div>
 </template>
 
@@ -26,11 +27,12 @@ import image14 from "./assets/14.jpg"
 import image15 from "./assets/15.jpg"
 import image16 from "./assets/16.jpg"
 import Gallery from './components/Gallery.vue'
+import FullSize from './components/FullSize.vue'
 
 export default {
   name: 'app',
   components: {
-    Gallery
+    Gallery, FullSize
   },
   data() {
     return {

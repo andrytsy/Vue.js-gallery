@@ -8,30 +8,23 @@
       </div>
       <img :src="image.url">
     </div>
-    <div @click="fullSizeOff" class="full-size" :class="{ 'active': fullSizeMode }">
-      <img :src="currentUrl">
-    </div>
   </div>
 </template>
 
 <script>
+import Bus from '../utils/bus.js'
+
 export default {
   props: ['data'],
   data() {
     return {
-      current: 0, 
-      currentUrl: '',
+      current: 0,
       fullSizeMode: false
     }
   },
   methods: {
-    fullSize(url) {
-      this.currentUrl = url;
-      this.fullSizeMode = true;
-    },
-    fullSizeOff() {
-      this.currentUrl = '';
-      this.fullSizeMode = false;
+    fullSize(src) {
+      Bus.$emit('fullSizeModeOn', src);
     },
     expand(img) {
       this.current = img.id;
@@ -113,31 +106,5 @@ h3 {
   -webkit-filter: none; /* Safari 6.0 - 9.0 */
   filter: none;
   transition: 0.5s;
-}
-
-.full-size {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(8, 14, 43, 0.4);
-  transition: 0.5s;
-  opacity: 0;
-  z-index: 0;
-}
-
-.full-size.active {
-  transition: 0.5s;
-  opacity: 10;
-  z-index: 10;
-}
-
-.full-size.active img {
-  z-index: 11;
 }
 </style>
